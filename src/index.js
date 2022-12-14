@@ -15,6 +15,13 @@ root.classList.add(
   'pt-[1px]'
 );
 
+if (window.location.hash.length > 0) window.location.hash.replace('#/', '');
+window.history.pushState(
+  { page: 1 },
+  'Some title',
+  '/rubber-duck-auth' + window.location.pathname
+);
+
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
     <BrowserRouter>
