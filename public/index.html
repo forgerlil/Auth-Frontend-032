@@ -15,17 +15,15 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <body>
-      <script>
-        if (window.location.hash.length > 0) {
-          window.location.hash.replace('#/', '');
-          history.pushState(
-            { page: 1 },
-            'Some title',
-            '/rubber-duck-auth' + window.location.pathname
-          );
-        }
-      </script>
-    </body>
+    <script>
+      if (window.location.hash.length > 0) {
+        window.location.hash.replace('#/', '');
+        history.pushState(
+          { page: 1 },
+          'Some title',
+          '/rubber-duck-auth' + window.location.pathname
+        );
+      }
+    </script>
   </body>
 </html>
