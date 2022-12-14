@@ -4,7 +4,7 @@ const DebuggingDuck = ({ user: { firstName }, ducks }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { name, image } = ducks.find((duck) => duck.id === parseInt(id));
+  const { name, image } = ducks.length && ducks.find((duck) => duck._id === id);
 
   return (
     <div className='w-full h-screen mt-[-1px] overflow-hidden flex flex-col items-center justify-center'>

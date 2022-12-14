@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const RubberDuck = ({ firstName, lastName, id, name, image }) => {
+const RubberDuck = ({ firstName, lastName, _id, name, image }) => {
   const navigate = useNavigate();
   return (
     <>
       <div
-        onClick={() => navigate(`/rubber-duck/${id}`)}
+        onClick={() => navigate(`/duck/${_id}`)}
         className='w-72 my-12 mx-8 p-4 bg-slate-100 dark:bg-slate-600 rounded flex flex-col items-center hover:bg-slate-200 dark:hover:bg-slate-500 hover:cursor-pointer transition-all duration-300'
       >
         <img

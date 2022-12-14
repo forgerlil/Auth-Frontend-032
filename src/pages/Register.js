@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const Register = () => {
+const Register = ({ setToken }) => {
   const navigate = useNavigate();
   const [{ firstName, lastName, email, password }, setForm] = useState({
     firstName: '',
@@ -15,9 +16,28 @@ const Register = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await axios.post('http://localhost:3100/user/register', {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+      localStorage.setItem('token', data);
+      setToken(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className='mt-[-1px] w-full h-screen flex items-center justify-center'>
-      <form className='flex flex-col items-center justify-between dark:bg-slate-600 pt-4 bg-slate-100 rounded overflow-hidden mx-auto my-0 w-2/3 sm:w-1/2 lg:w-1/3 transition-all'>
+      <form
+        onSubmit={handleSubmit}
+        className='flex flex-col items-center justify-between dark:bg-slate-600 pt-4 bg-slate-100 rounded overflow-hidden mx-auto my-0 w-2/3 sm:w-1/2 lg:w-1/3 transition-all'
+      >
         <h1 className='mt-2 mb-8 lg:mb-16 text-xl font-semibold dark:text-white'>
           Register
         </h1>

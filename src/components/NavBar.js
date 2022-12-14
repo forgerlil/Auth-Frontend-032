@@ -44,6 +44,9 @@ const NavBar = () => {
 
   return (
     <div className='fixed w-screen mt-[-1px] h-12 bg-amber-500 dark:bg-yellow-600 flex justify-end'>
+      {/* <button onClick={() => setIsAuthenticated((prev) => !prev)}>
+        Authenticated: {isAuthenticated ? 'yes' : 'no'}
+      </button> */}
       <div
         className='sm:hidden text-3xl flex items-center p-4'
         onClick={showDropdown}

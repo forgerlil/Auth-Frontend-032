@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const Login = () => {
+const Login = ({ setToken }) => {
   const navigate = useNavigate();
   const [{ email, password }, setForm] = useState({
     email: '',
@@ -13,9 +14,26 @@ const Login = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await axios.post('http://localhost:3100/user/login', {
+        email,
+        password,
+      });
+      localStorage.setItem('token', data);
+      setToken(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className='mt-[-1px] w-full h-screen flex items-center justify-center'>
-      <form className='flex flex-col items-center justify-between dark:bg-slate-600 pt-4 bg-slate-100 rounded overflow-hidden mx-auto my-0 w-2/3 sm:w-1/2 md:w-1/3 transition-all'>
+      <form
+        onSubmit={handleSubmit}
+        className='flex flex-col items-center justify-between dark:bg-slate-600 pt-4 bg-slate-100 rounded overflow-hidden mx-auto my-0 w-2/3 sm:w-1/2 md:w-1/3 transition-all'
+      >
         <h1 className='mt-2 mb-8 lg:mb-16 text-xl font-semibold dark:text-white'>
           Login
         </h1>
