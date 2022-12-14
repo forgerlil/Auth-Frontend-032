@@ -16,14 +16,13 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script>
-      if (window.location.hash.length > 0) {
+      if (window.location.hash.length > 0)
         window.location.hash.replace('#/', '');
-        history.pushState(
-          { page: 1 },
-          'Some title',
-          '/rubber-duck-auth' + window.location.pathname
-        );
-      }
+      history.pushState(
+        { page: 1 },
+        'Some title',
+        '/rubber-duck-auth' + window.location.pathname
+      );
     </script>
   </body>
 </html>
