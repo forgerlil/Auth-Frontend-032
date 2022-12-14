@@ -7,17 +7,8 @@
   </head>
   <body></body>
   <script>
-    if (window.location.hash.length > 0) {
-      const path = window.location.hash.replace('#', '');
-      history.pushState(
-        { page: 1 },
-        `${window.location.hash.slice(2)}`,
-        '/rubber-duck-auth' + path
-      );
-
-      // document.getElementById('header').innerHTML = document
-      //   .getElementById('header')
-      //   .innerHTML.replace('{PATH}', path);
-    }
+    window.location.href =
+      '/rubber-duck-auth/#' +
+      window.location.pathname.replace('/rubber-duck-auth', '');
   </script>
 </html>
