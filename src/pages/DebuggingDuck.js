@@ -1,15 +1,19 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
 
-const DebuggingDuck = ({ user: { firstName }, ducks }) => {
+const DebuggingDuck = ({ ducks }) => {
+  const { user } = useAuthContext();
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { name, image } = ducks.find((duck) => duck.id === parseInt(id));
+  const { name, image } = ducks.length && ducks.find((duck) => duck._id === id);
 
   return (
     <div className='w-full h-screen mt-[-1px] overflow-hidden flex flex-col items-center justify-center'>
       <div className='mt-4 mb-8 p-4 bg-slate-100 dark:bg-slate-600 rounded flex flex-col items-center transition-all duration-300'>
-        <p className='mb-4 text-2xl font-semibold'>Hello {firstName}</p>
+        <p className='mb-4 text-2xl font-semibold'>
+          Hello {user?.firstName ? user.firstName : 'there'}!
+        </p>
         <p className='mb-1 font-thin'>
           I am {name}, and I will assist you with your debugging for this
           session.

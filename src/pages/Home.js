@@ -1,9 +1,11 @@
 import { RubberDuck } from '../components';
+import { useAuthContext } from '../context/AuthContext';
 
-const Home = ({ user, ducks }) => {
+const Home = ({ ducks }) => {
+  const { user } = useAuthContext();
   return (
     <>
-      <div className='w-full flex flex-col items-center mt-[-1px]'>
+      <div className='w-full flex flex-col items-center mt-[-1px] dark:bg-slate-700 h-fit'>
         <div className='w-fit mt-28 p-4 flex flex-col items-center'>
           <h1 className='text-3xl font-semibold mb-8'>Rubber Duck Selector</h1>
           <h3 className='text-lg font-thin mb-12'>
@@ -14,7 +16,7 @@ const Home = ({ user, ducks }) => {
           <div className='w-fit my-4 p-4 rounded flex flex-wrap justify-center'>
             {ducks.length ? (
               ducks.map((duck) => (
-                <RubberDuck key={duck.id} {...user} {...duck} />
+                <RubberDuck key={duck._id} {...user} {...duck} />
               ))
             ) : (
               <div className='text-xl font-thin'>
