@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
 
 const ulStyles = {
   dropdown:
@@ -9,21 +10,40 @@ const ulStyles = {
 };
 
 const MenuList = ({ dropdown = false }) => {
+  const { isAuthenticated, setIsAuthenticated, setToken, setUser } =
+    useAuthContext();
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setToken();
+    setUser(null);
+    setIsAuthenticated(false);
+  };
+
   return (
     <ul className={dropdown ? ulStyles.dropdown : ulStyles.expanded}>
       <li className='mx-4 my-2'>
         <Link to='/'>Home</Link>
       </li>
-      <li className='mx-4 my-2'>
-        <Link to='/login'>Login</Link>
-      </li>
-      <li className='mx-4 my-2'>
-        <Link to='/register'>Register</Link>
-      </li>
-      <li className='mx-4 my-2'>
-        <Link to='/addDuck'>Add my Duck</Link>
-      </li>
-      <li className='mx-4 my-2 hover:cursor-pointer'>Logout</li>
+      {!isAuthenticated ? (
+        <>
+          <li className='mx-4 my-2'>
+            <Link to='/login'>Login</Link>
+          </li>
+          <li className='mx-4 my-2'>
+            <Link to='/register'>Register</Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li className='mx-4 my-2'>
+            <Link to='/auth/addDuck'>Add my Duck</Link>
+          </li>
+          <li className='mx-4 my-2 hover:cursor-pointer' onClick={logout}>
+            Logout
+          </li>
+        </>
+      )}
     </ul>
   );
 };

@@ -1,6 +1,8 @@
 import { RubberDuck } from '../components';
+import { useAuthContext } from '../context/AuthContext';
 
-const Home = ({ user, ducks }) => {
+const Home = ({ ducks }) => {
+  const { user } = useAuthContext();
   return (
     <>
       <div className='w-full flex flex-col items-center mt-[-1px] dark:bg-slate-700 h-fit'>

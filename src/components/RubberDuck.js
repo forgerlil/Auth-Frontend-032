@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const RubberDuck = ({ firstName, lastName, _id, name, image }) => {
+const RubberDuck = ({ _id, name, image, owner: { firstName, lastName } }) => {
   const navigate = useNavigate();
   return (
     <>
